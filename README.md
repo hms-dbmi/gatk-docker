@@ -12,7 +12,7 @@ Authors: Soo Lee (duplexa@gmail.com) & Daniel Kwon (daniel.minseok.kwon@gmail.co
 
 
 ## Docker image
-The docker image is stored as duplexa/gatk_env:v1 on hub.docker.com.
+The docker image is stored as dbmi/gatk-docker:v1 on hub.docker.com.
 
 ## Prerequisites
 * docker daemon
