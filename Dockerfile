@@ -35,9 +35,10 @@ COPY vcftools-0.1.12/ vcftools-0.1.12/
 COPY jdk1.8.0_45/ jdk1.8.0_45/	  
 COPY jdk1.6.0_45/ jdk1.6.0_45/
 COPY run_scripts/ run_scripts/
+COPY run_scripts2/ run_scripts2/
 
 ## path
-ENV PATH /usr/local/bin/run_scripts/:/usr/local/bin/annovar/:/usr/local/bin/BEDtools-2.23.0/bin/:/usr/local/bin/bincov/:/usr/local/bin/bwa-0.7.8/bin/:/usr/local/bin/fastqc-0.11.3/:/usr/local/bin/jdk1.7.0_71/bin/:/usr/local/bin/samtools-1.3/bin/:/usr/local/bin/tabix-0.2.6/:/usr/local/bin/vcftools-0.1.12/bin/:$PATH
+ENV PATH /usr/local/bin/run_scripts2/:/usr/local/bin/run_scripts/:/usr/local/bin/annovar/:/usr/local/bin/BEDtools-2.23.0/bin/:/usr/local/bin/bincov/:/usr/local/bin/bwa-0.7.8/bin/:/usr/local/bin/fastqc-0.11.3/:/usr/local/bin/jdk1.7.0_71/bin/:/usr/local/bin/samtools-1.3/bin/:/usr/local/bin/tabix-0.2.6/:/usr/local/bin/vcftools-0.1.12/bin/:$PATH
 ## by default Java 1.7 is included in the path. To use Java 1.8, /usr/local/bin/jdk1.8.0_45/bin/ must be included in the path in run time.
 
 ## default command is bash.
