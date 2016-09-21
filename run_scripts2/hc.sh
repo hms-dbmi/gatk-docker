@@ -11,7 +11,7 @@ display_usage() {
   echo -e "  fasta : reference genome fasta file"
   echo -e "  dbSNP : reference dbSNP vcf file"
   echo -e "  region: region (eg. 21:1-50000). The region must match the chromosome."
-  echo -e "  prefix: prefix of the output files. The output file name will be prefix.region.g.vcf."
+  echo -e "  prefix: prefix of the output files. The output file name will be \$prefix.hc.geno.\$region.g.vcf."
   echo -e "  ncore: number of CPUs (recommended: 2)"
   echo -e "  mem: memory (recommended: 4G)."
   echo -e "  GATKversion: GATKversion (recommended: 3.5n)."
