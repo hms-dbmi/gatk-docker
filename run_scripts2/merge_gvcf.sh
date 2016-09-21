@@ -4,11 +4,11 @@ display_usage() {
   echo -e "This script runs the Merge GVCF step of a variant calling pipeline based on bwa-gatk."  
   echo -e ""
   echo -e "Usage:"
-  echo -e "  $0 VCFFILES, FASTA, prefix mem GATKversion"
+  echo -e "  $0 vcffiles, fasta, prefix mem GATKversion"
   echo -e ""
   echo -e "Arguments:"
-  echo -e "  VCFFILES: input vcf files to be merged. Comma-delimited list."
-  echo -e "  FASTA: reference genome fasta file."
+  echo -e "  vcffiles: input vcf files to be merged. Comma-delimited list."
+  echo -e "  fasta: reference genome fasta file."
   echo -e "  prefix: prefix of the output vcf file. The output file name will be prefix.hc.raw.g.vcf."
   echo -e "  mem: memory (recommended: 2G)."
   echo -e "  GATKversion: version of GATK (recommended: 3.5n)."
@@ -43,7 +43,7 @@ outputname=$prefix.hc.raw.g.vcf
 
 
 vcf_list_str=''
-for vcffile in ${vcffiles//,/ }
+for vcffile in ${VCFFILES//,/ }
 do
  vcf_list_str='--variant '$vcffile' '$vcf_list_str
 done
