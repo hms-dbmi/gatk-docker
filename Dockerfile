@@ -7,10 +7,10 @@ RUN yum update -y && yum install -y wget gcc make gcc-c++ epel-release  ## wget,
 
 ## installing R 3.1.2 ##
 WORKDIR /usr/local/bin/
-RUN wget http://lib.stat.cmu.edu/R/CRAN/src/base/R-3/R-3.1.2.tar.gz && tar xzvf R-3.1.2.tar.gz  # downloading R 3.1.2
-WORKDIR /usr/local/bin/R-3.1.2
-RUN yum-builddep R -y ## installing necessary dependencies for R
-RUN ./configure && make && make install && make install-info && make install-pdf  ## installing R 3.1.2
+#RUN wget http://lib.stat.cmu.edu/R/CRAN/src/base/R-3/R-3.1.2.tar.gz && tar xzvf R-3.1.2.tar.gz  # downloading R 3.1.2
+#WORKDIR /usr/local/bin/R-3.1.2
+#RUN yum-builddep R -y ## installing necessary dependencies for R
+#RUN ./configure && make && make install && make install-info && make install-pdf  ## installing R 3.1.2
 ## End Installing R 3.1.2 ##
 
 ## The rest is copied

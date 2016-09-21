@@ -4,14 +4,14 @@ display_usage() {
   echo -e "This script runs the Merge GVCF step of a variant calling pipeline based on bwa-gatk."  
   echo -e ""
   echo -e "Usage:"
-  echo -e "  $0 project_indir project_outdir prefix region_list_str mem"
+  echo -e "  $0 VCFFILES, FASTA, prefix mem GATKversion"
   echo -e ""
   echo -e "Arguments:"
-  echo -e "  project_indir: directory in which input files are placed."
-  echo -e "  project_outdir: directory in which output files are placed."
-  echo -e "  prefix: prefix of the input/output vcf files. The input file names are assumed to be prefix.region.g.vcf and the output file name will be prefix.hc.raw.g.vcf."
-  echo -e "  region_list_str: comma-separated list of regions (eg. 21:1-50000)."
+  echo -e "  VCFFILES: input vcf files to be merged. Comma-delimited list."
+  echo -e "  FASTA: reference genome fasta file."
+  echo -e "  prefix: prefix of the output vcf file. The output file name will be prefix.hc.raw.g.vcf."
   echo -e "  mem: memory (recommended: 2G)."
+  echo -e "  GATKversion: version of GATK (recommended: 3.5n)."
   echo -e ""
 }
 
@@ -31,32 +31,25 @@ fi
 
 ####################
 
-project_indir=$1
-project_outdir=$2
+
+VCFFILES=$1 ## comma-separated list of files
+FASTA=$2 ## human_g1k_v37_decoy.fasta ## other fai, dict files should come with it
 prefix=$3
-region_list_str=$4  ## 2:1-50000,2:50001-110000,...
-mem=$5
+mem=$4
+GATKversion=$5 ## 3.5n
+
+outputname=$prefix.hc.raw.g.vcf
 
 
-if [ ! -d $project_indir ]; then
-  echo -e "project input directory doesn't exist."
-  exit 1
-fi
 
-if [ ! -d $project_outdir ]; then
-  mkdir -p $project_outdir
-fi
-
-
-region_list=(${region_list_str//,/ }) # convert to array
 vcf_list_str=''
-for tmpregion in "${region_list[@]}"
+for vcffile in ${vcffiles//,/ }
 do
- vcf_list_str='--variant '$project_indir/$prefix.$tmpregion.g.vcf' '$vcf_list_str
+ vcf_list_str='--variant '$vcffile' '$vcf_list_str
 done
 
 
 ### HaplotypeCaller (Simple example)
 #### step2. merge g.vcf
-java -Xmx$mem -Xms$mem -cp /usr/local/bin/GATK3.5n/GenomeAnalysisTK.jar org.broadinstitute.gatk.tools.CatVariants  -R /resources/human_g1k_v37_decoy.fasta $vcf_list_str -out $project_outdir/$prefix.hc.raw.g.vcf --assumeSorted -l INFO
+java -Xmx$mem -Xms$mem -cp /usr/local/bin/GATK$GATKversion/GenomeAnalysisTK.jar org.broadinstitute.gatk.tools.CatVariants  -R $FASTA $vcf_list_str -out $outputname --assumeSorted -l INFO
 
